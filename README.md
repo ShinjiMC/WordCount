@@ -337,10 +337,6 @@ g++ -O2 -o wordcount word_count.cpp
 
 constexpr size_t BLOCK_SIZE = 1 << 22; // 4MB
 
-bool is_separator(char c)
-{
-    return std::isspace(c) || std::ispunct(static_cast<unsigned char>(c));
-}
 
 void process_chunk(std::ifstream &file, size_t start, size_t end,
                    std::unordered_map<std::string, size_t> &local_map, size_t &local_count)
