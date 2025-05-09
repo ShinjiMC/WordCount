@@ -196,16 +196,12 @@ g++ -O2 -o wordcount word_count.cpp
 
 ### 3. Conteo de Palabras con Paralelismo (OpenMP)
 
-1. **Definición de separadores y tamaño de bloque (`BLOCK_SIZE`):**
+1. **Tamaño de bloque (`BLOCK_SIZE`):**
 
-   Se define `BLOCK_SIZE` con un tamaño de 4MB, para dividir el archivo en bloques grandes y eficientes al procesar. La función `is_separator` determina si un carácter es un espacio o puntuación, lo cual permite identificar los límites entre palabras durante el análisis del texto.
+   Se define `BLOCK_SIZE` con un tamaño de 4MB, para dividir el archivo en bloques grandes y eficientes al procesar.
 
    ```cpp
    constexpr size_t BLOCK_SIZE = 1 << 22;
-   bool is_separator(unsigned char c)
-   {
-       return std::isspace(c) || std::ispunct(static_cast<unsigned char>(c));
-   }
    ```
 
 2. **Función `process_chunk`:**
