@@ -1,5 +1,5 @@
 .vscode
 *.txt
-wordcount_freq
-wordcount_freq_parallel
+wordcount
+wordcount_parallel
 new.py
