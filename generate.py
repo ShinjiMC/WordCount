@@ -1,16 +1,20 @@
 import os
+import sys
 
-LOREM = (
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
-    "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
-    "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
-    "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. "
-    "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n"
+TEXT = (
+    "La inteligencia artificial esta transformando la manera en que vivimos, trabajamos y nos comunicamos. "
+    "Desde los asistentes virtuales hasta los algoritmos que detectan enfermedades, la IA ofrece soluciones innovadoras. "
+    "Su capacidad para analizar grandes cantidades de datos permite tomar decisiones mas informadas y precisas. "
+    "Sin embargo, tambien plantea desafios eticos como la privacidad, el sesgo algoritmico y la automatizacion del empleo. "
+    "El desarrollo responsable de estas tecnologias es crucial para maximizar beneficios y minimizar riesgos. "
+    "La colaboracion entre cientificos, gobiernos y empresas resulta esencial para garantizar un uso etico. "
+    "A medida que la IA evoluciona, se vuelve cada vez mas presente en nuestra vida diaria, desde la educacion hasta la medicina. "
+    "Comprender sus implicancias y limitaciones es clave para aprovechar su potencial sin comprometer nuestros valores.\n"
 )
 
-def generate_large_lorem_file(filename, target_size_gb=20):
-    target_size_bytes = target_size_gb * 1024**3  # 20 GB
-    block = (LOREM * 1000).encode('utf-8')  # ~60KB per block
+def generate_file(filename, target_size_gb):
+    target_size_bytes = target_size_gb * 1024**3
+    block = (TEXT * 100).encode('utf-8')
     block_size = len(block)
 
     written = 0
@@ -21,7 +25,17 @@ def generate_large_lorem_file(filename, target_size_gb=20):
             if written % (1024**3) < block_size:
                 print(f'Progress: {written / 1024**3:.2f} GB written')
 
-    print(f'✅ File "{filename}" generated with size: {written / 1024**3:.2f} GB')
+    print(f'✅ Archivo \"{filename}\" generado con tamaño: {written / 1024**3:.2f} GB')
 
 if __name__ == "__main__":
-    generate_large_lorem_file("lorem_20GB.txt", target_size_gb=20)
+    if len(sys.argv) > 1:
+        try:
+            gb = int(sys.argv[1])
+        except ValueError:
+            print("❌ El argumento debe ser un número entero (GB)")
+            sys.exit(1)
+    else:
+        gb = 20
+    filename = f"text_{gb}GB.txt"
+    print(len(TEXT.split()))
+    generate_file(filename, target_size_gb=gb)
